@@ -6,7 +6,7 @@ import EditarPerfil from './EditarPerfil';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function VisualizacaoPerfil() {
+export default function VisualizacaoPerfilPet() {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
@@ -18,54 +18,39 @@ export default function VisualizacaoPerfil() {
             <TouchableOpacity>
               <Feather name="menu" size={24} color="#434343" />
             </TouchableOpacity>
-            <Text style={styles.texto1}>{"Meu perfil"}</Text>
+            <Text style={styles.texto1}>{"Perfil Pet"}</Text>
           </View>
         </View>
         <View style={styles.content}>
           <View style={styles.circle}>
             <FontAwesome name="circle" size={250} color="#434343" />
           </View>
-          <Text style={styles.texto2}>{"Marilia martins"}</Text>
+          <Text style={styles.texto2}>{"Rex"}</Text>
           <View style={styles.campo}>
-            <Text style={styles.title}>{"NOME COMPLETO"}</Text>
-            <Text style={styles.textContent}>{"Marília Martins de Souza"}</Text>
+            <Text style={styles.title}>{"NOME"}</Text>
+            <Text style={styles.textContent}>{"Rex"}</Text>
           </View>
           <View style={styles.campo}>
             <Text style={styles.title}>{"IDADE"}</Text>
-            <Text style={styles.textContent}>{"27 anos"}</Text>
+            <Text style={styles.textContent}>{"4 anos"}</Text>
           </View>
           <View>
             <View style={styles.campo}>
-            <Text style={styles.title}>{"EMAIL"}</Text>
-            <Text style={styles.textContent}>{"marília_martins@gmail.com"}</Text>
+            <Text style={styles.title}>{"TIPO"}</Text>
+            <Text style={styles.textContent}>{"Cachorro"}</Text>
           </View>
           <View style={styles.campo}>
-            <Text style={styles.title}>{"LOCALIZAÇÃO"}</Text>
-            <Text style={styles.textContent}>{"Sobradinho - Distrito Federal"}</Text>
+            <Text style={styles.title}>{"RAÇA"}</Text>
+            <Text style={styles.textContent}>{"Border Collie"}</Text>
           </View>
           <View style={styles.campo}>
-            <Text style={styles.title}>{"ENDEREÇO"}</Text>
-            <Text style={styles.textContent}>{"Rua 203, conjunto B, casa 37"}</Text>
-          </View>
-          <View style={styles.campo}>
-            <Text style={styles.title}>{"TELEFONE"}</Text>
-            <Text style={styles.textContent}>{"(61) 98274-2947"}</Text>
-          </View>
-          <View style={styles.campo}>
-            <Text style={styles.title}>{"NOME DE USUÁRIO"}</Text>
-            <Text style={styles.textContent}>{"mari_martins"}</Text>
-          </View>
-          <View style={styles.campo}>
-            <Text style={styles.title}>{"HISTÓRICO"}</Text>
-            <Text style={styles.textContent}>{"Adotou 1 gato"}</Text>
+            <Text style={styles.title}>{"NOME COMPLETO DO DONO"}</Text>
+            <Text style={styles.textContent}>{"Marília Martins de Souza"}</Text>
           </View>
           </View>
           <View>
             <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('EditarPerfil')}>
               <Text style={styles.btnText}>{"EDITAR PERFIL"}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('VizualizacaoPerfilPet')}>
-              <Text style={styles.btnText}>{"PERFIL PET"}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -132,7 +117,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#88C9BF',
     minWidth: 232,
     minHeight: 40,
-    marginBottom: 15,
   },
   btnText: {
     color: '#434343',
