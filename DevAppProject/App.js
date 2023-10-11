@@ -9,6 +9,7 @@ import LoginScreen from "./src/screens/Login.js";
 import VisualizacaoPerfil from "./src/screens/VisualizacaoPerfil.js";
 import CadastroForm from "./src/screens/CadastroForm.js";
 import EditarPerfil from "./src/screens/EditarPerfil.js";
+import VisualizacaoPerfilPet from "./src/screens/VisualizacaoPerfilPet.js"
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,8 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginTela} />
         <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
         <Stack.Screen name="VisualizacaoPerfil" component={VisualizacaoPerfil} />
+        <Stack.Screen name="VisualizacaoPerfilPet" component={VisualizacaoPerfilPet} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
