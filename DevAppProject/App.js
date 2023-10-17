@@ -9,6 +9,7 @@ import LoginScreen from "./src/screens/Login.js";
 import VisualizacaoPerfil from "./src/screens/VisualizacaoPerfil.js";
 import CadastroForm from "./src/screens/CadastroForm.js";
 import EditarPerfil from "./src/screens/EditarPerfil.js";
+import cadAnimal from "./src/screens/cadAnimal.js";
 
 const Stack = createNativeStackNavigator();
 
