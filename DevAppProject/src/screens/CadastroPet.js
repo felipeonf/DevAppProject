@@ -7,46 +7,58 @@ import {
     StyleSheet,
   } from "react-native";
 
+
 import { useState } from 'react';
 
 const CadastroPetForm = ()  => {
 
-    const nomePet = [nomePet, setNomePet] = useState('')
-    const tipo = [tipo, setTipo] = useState('')
-    const idade = [idade, setIdade] = useState('')
+    const [nomePet, setNomePet] = useState('')
+    const [tipo, setTipo] = useState('')
+    const [idade, setIdade] = useState('')
+    const [raca, setRaca] = useState('')
 
     const handleCadastro = () => {
 
+      const petData = {
 
-        navigation.navigate('Login');
+        nome: nomePet,
+        tipo: tipo,
+        idade: idade,
+        raca: raca,
+
+      };
+
+      firebase.database().ref('pets').push(petData)
 
     };
-
-
-    
 
 
     return (
         <View style={styles.container}>
       <Text style={styles.title}>Cadastro</Text>
       <TextInput
-        placeholder="Email"
+        placeholder="Nome do Pet"
         style={styles.input}
-        value={email}
-        onChangeText={(text) => setEmail(text)}
+        value={nomePet}
+        onChangeText={(text) => setNomePet(text)}
       />
       <TextInput
-        placeholder="Login"
+        placeholder="Tipo do Pet"
         style={styles.input}
-        value={login}
-        onChangeText={(text) => setLogin(text)}
+        value={tipo}
+        onChangeText={(text) => setTipo(text)}
       />
       <TextInput
-        placeholder="Senha"
+        placeholder="Idade do Pet"
         style={styles.input}
-        secureTextEntry={true}
-        value={senha}
-        onChangeText={(text) => setSenha(text)}
+        value={idade}
+        onChangeText={(text) => setIdade(text)}
+      />
+      <TextInput
+        placeholder="Raca do Pet"
+        style={styles.input}
+        value={raca}
+        onChangeText={(text) => setRaca(text)}
       />
       <TouchableOpacity style={styles.button} onPress={handleCadastro}>
         <Text style={styles.buttonText}>Cadastrar</Text>
@@ -58,38 +70,39 @@ const CadastroPetForm = ()  => {
 }
 
 const styles = StyleSheet.create({
-    content: {
-        alignItems: "center",
-        textAlign: "center",
-      },
-      ops: {
-        fontSize: 60,
-        fontStyle: "italic",
-        paddingTop: 50,
-        marginBottom: 30,
-        color: "#88C9BF",
-      },
-      btnContainer: {
-        backgroundColor: "#88C9BF",
-        minWidth: 232,
-        minHeight: 40,
-      },
-      btnText: {
-        color: "#434343",
-        textAlign: "center",
-        paddingTop: 13,
-        fontFamily: "Roboto",
-        fontSize: 12,
-      },
-      textContent: {
-        marginBottom: 10,
-        marginTop: 40,
-        color: "#BDBDBD",
-        fontFamily: "Roboto",
-        fontSize: 14,
-      },
-
-
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  input: {
+    width: '100%',
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginBottom: 12,
+  },
+  button: {
+    width: '100%',
+    height: 40,
+    backgroundColor: '#88C9BF',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#434343',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
 export default CadastroPetForm;

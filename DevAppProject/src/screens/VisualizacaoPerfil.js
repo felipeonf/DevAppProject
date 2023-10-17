@@ -64,7 +64,7 @@ export default function VisualizacaoPerfil({ navigation }) {
             <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('EditarPerfil')}>
               <Text style={styles.btnText}>{"EDITAR PERFIL"}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('VisualizacaoPerfilPet')}>
+            <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('ListaPet')}>
               <Text style={styles.btnText}>{"PERFIL PET"}</Text>
             </TouchableOpacity>
           </View>
