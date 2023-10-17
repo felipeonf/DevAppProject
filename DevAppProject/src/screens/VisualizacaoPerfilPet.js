@@ -6,8 +6,7 @@ import EditarPerfil from './EditarPerfil';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function VisualizacaoPerfilPet() {
-  const navigation = useNavigation();
+const VisualizacaoPerfilPet = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -125,3 +124,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
   }
 });
+
+export default VisualizacaoPerfilPet;

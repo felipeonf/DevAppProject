@@ -7,8 +7,7 @@ import VisualizacaoPerfilPet from './VisualizacaoPerfilPet';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function VisualizacaoPerfil() {
-  const navigation = useNavigation();
+export default function VisualizacaoPerfil({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -65,7 +64,7 @@ export default function VisualizacaoPerfil() {
             <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('EditarPerfil')}>
               <Text style={styles.btnText}>{"EDITAR PERFIL"}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('VizualizacaoPerfilPet')}>
+            <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('VisualizacaoPerfilPet')}>
               <Text style={styles.btnText}>{"PERFIL PET"}</Text>
             </TouchableOpacity>
           </View>
