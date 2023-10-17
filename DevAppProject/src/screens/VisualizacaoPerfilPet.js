@@ -48,7 +48,7 @@ const VisualizacaoPerfilPet = ({ navigation }) => {
           </View>
           </View>
           <View>
-            <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('EditarPerfil')}>
+            <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('EditarPerfilPet')}>
               <Text style={styles.btnText}>{"EDITAR PERFIL"}</Text>
             </TouchableOpacity>
           </View>

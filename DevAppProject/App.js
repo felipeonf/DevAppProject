@@ -12,6 +12,7 @@ import EditarPerfil from "./src/screens/EditarPerfil.js";
 import VisualizacaoPerfilPet from "./src/screens/VisualizacaoPerfilPet.js"
 import CadastroPetForm from "./src/screens/CadastroPet";
 import ListaPet from "./src/screens/ListaPet";
+import EditarPerfilPet from "./src/screens/EditarPerfilPet";
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +49,8 @@ export default function App() {
         <Stack.Screen name="VisualizacaoPerfilPet" component={VisualizacaoPerfilPet} />
         <Stack.Screen name = "CadastroPet" component={CadastroPetForm} />
         <Stack.Screen name = "ListaPet" component={ListaPet} />
+        <Stack.Screen name = "EditarPerfilPet" component={EditarPerfilPet} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

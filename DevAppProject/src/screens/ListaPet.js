@@ -27,6 +27,9 @@ export default function ListaPet({ navigation }) {
             <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('CadastroPet')}>
               <Text style={styles.btnText}>{"CADASTRAR NOVO PET"}</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.btnContainer} onPress={() => navigation.navigate('VisualizacaoPerfilPet')}>
+              <Text style={styles.btnText}>{"VER PET"}</Text>
+            </TouchableOpacity>
 
           </View>
         </View>
