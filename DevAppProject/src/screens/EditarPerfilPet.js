@@ -39,6 +39,12 @@ const EditarPerfilPet = ({ navigation }) => {
     onChangeText={(text) => setNomePet(text)}
   />
   <TextInput
+    placeholder="Nome do Dono"
+    style={styles.input}
+    value={dono}
+    onChangeText={(text) => setTipo(text)}
+  />
+  <TextInput
     placeholder="Tipo do Pet"
     style={styles.input}
     value={tipo}
@@ -56,6 +62,12 @@ const EditarPerfilPet = ({ navigation }) => {
     value={raca}
     onChangeText={(text) => setRaca(text)}
   />
+  <TextInput
+        placeholder="Peso do Pet"
+        style={styles.input}
+        value={peso}
+        onChangeText={(text) => setPeso(text)}
+      />
   <View style={styles.buttonContainer}>
     <Text>Adoção</Text>
     <Button
@@ -100,7 +112,7 @@ const EditarPerfilPet = ({ navigation }) => {
       <TextInput
         placeholder="Descrição"
         style={styles.input}
-        value={raca}
+        value={descricao}
         onChangeText={(text) => setDescricao(text)}
       />
   

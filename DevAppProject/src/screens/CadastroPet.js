@@ -74,7 +74,7 @@ const CadastroPetForm = ()  => {
       <TextInput
         placeholder="Peso do Pet"
         style={styles.input}
-        value={raca}
+        value={peso}
         onChangeText={(text) => setPeso(text)}
       />
       <View style={styles.buttonContainer}>
@@ -121,7 +121,7 @@ const CadastroPetForm = ()  => {
       <TextInput
         placeholder="Descrição"
         style={styles.input}
-        value={raca}
+        value={descricao}
         onChangeText={(text) => setDescricao(text)}
       />
       <TouchableOpacity style={styles.button} onPress={handleCadastro}>
