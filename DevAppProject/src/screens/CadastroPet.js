@@ -5,6 +5,7 @@ import {
     TextInput,
     TouchableOpacity,
     StyleSheet,
+    Button,
   } from "react-native";
 
 
@@ -16,6 +17,11 @@ const CadastroPetForm = ()  => {
     const [tipo, setTipo] = useState('')
     const [idade, setIdade] = useState('')
     const [raca, setRaca] = useState('')
+    const [adocao, setAdocao] = useState(false)
+    const [vacinado, setVacinado] = useState(false)
+    const [peso, setPeso] = useState('')
+    const [descricao, setDescricao] = useState('')
+    const [sexo, setSexo] = useState(false)
 
     const handleCadastro = () => {
 
@@ -25,6 +31,11 @@ const CadastroPetForm = ()  => {
         tipo: tipo,
         idade: idade,
         raca: raca,
+        adocao: adocao,
+        vacinado: vacinado,
+        peso: peso,
+        descricao: descricao,
+        sexo: sexo,
 
       };
 
@@ -59,6 +70,59 @@ const CadastroPetForm = ()  => {
         style={styles.input}
         value={raca}
         onChangeText={(text) => setRaca(text)}
+      />
+      <TextInput
+        placeholder="Peso do Pet"
+        style={styles.input}
+        value={raca}
+        onChangeText={(text) => setPeso(text)}
+      />
+      <View style={styles.buttonContainer}>
+        <Text>Adoção</Text>
+        <Button
+          title="Sim"
+          onPress={() => setAdocao(true)}
+          color={adocao ? 'green' : 'gray'}
+        />
+        <Button
+          title="Não"
+          onPress={() => setAdocao(false)}
+          color={!adocao ? 'red' : 'gray'}
+        />
+        </View>
+        <View style={styles.buttonContainer}>
+        <Text>Sexo</Text>
+        <Button
+          title="Macho"
+          onPress={() => setSexo(true)}
+          color={sexo ? 'blue' : 'gray'}
+        />
+        <Button
+          title="Fêmea"
+          onPress={() => setSexo(false)}
+          color={!sexo ? 'pink' : 'gray'}
+        />
+      </View>
+
+        <View style={styles.buttonContainer}>
+        <Text>Vacinado</Text>
+        <Button
+          title="Sim"
+          onPress={() => setVacinado(true)}
+          color={vacinado ? 'green' : 'gray'}
+        />
+        <Button
+          title="Não"
+          onPress={() => setVacinado(false)}
+          color={!vacinado ? 'red' : 'gray'}
+        />
+      </View>
+
+      <TextInput
+        placeholder="Descrição"
+        style={styles.input}
+        value={raca}
+        onChangeText={(text) => setDescricao(text)}
       />
       <TouchableOpacity style={styles.button} onPress={handleCadastro}>
         <Text style={styles.buttonText}>Cadastrar</Text>
@@ -102,6 +166,13 @@ const styles = StyleSheet.create({
     color: '#434343',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 12,
   },
 });
 
