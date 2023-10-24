@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Button
 } from "react-native";
 
 const EditarPerfilPet = ({ navigation }) => {
@@ -13,6 +14,11 @@ const EditarPerfilPet = ({ navigation }) => {
     const [idade, setIdade] = useState('4 anos')
     const [raca, setRaca] = useState('Border Collie')
     const [dono, setDono] = useState('Marília Martins de Souza')
+    const [adocao, setAdocao] = useState(false)
+    const [vacinado, setVacinado] = useState(false)
+    const [peso, setPeso] = useState('3 kg')
+    const [descricao, setDescricao] = useState('Bem comportado')
+    const [sexo, setSexo] = useState(false)
 
 
 
@@ -25,7 +31,7 @@ const EditarPerfilPet = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-  <Text style={styles.title}>Cadastro</Text>
+  <Text style={styles.title}>Editar</Text>
   <TextInput
     placeholder="Nome do Pet"
     style={styles.input}
@@ -50,8 +56,56 @@ const EditarPerfilPet = ({ navigation }) => {
     value={raca}
     onChangeText={(text) => setRaca(text)}
   />
+  <View style={styles.buttonContainer}>
+    <Text>Adoção</Text>
+    <Button
+      title="Sim"
+      onPress={() => setAdocao(true)}
+      color={adocao ? 'green' : 'gray'}
+    />
+    <Button
+      title="Não"
+      onPress={() => setAdocao(false)}
+      color={!adocao ? 'red' : 'gray'}
+      />
+  </View>
+  <View style={styles.buttonContainer}>
+        <Text>Sexo</Text>
+        <Button
+          title="Macho"
+          onPress={() => setSexo(true)}
+          color={sexo ? 'blue' : 'gray'}
+        />
+        <Button
+          title="Fêmea"
+          onPress={() => setSexo(false)}
+          color={!sexo ? 'pink' : 'gray'}
+        />
+      </View>
+
+        <View style={styles.buttonContainer}>
+        <Text>Vacinado</Text>
+        <Button
+          title="Sim"
+          onPress={() => setVacinado(true)}
+          color={vacinado ? 'green' : 'gray'}
+        />
+        <Button
+          title="Não"
+          onPress={() => setVacinado(false)}
+          color={!vacinado ? 'red' : 'gray'}
+        />
+      </View>
+
+      <TextInput
+        placeholder="Descrição"
+        style={styles.input}
+        value={raca}
+        onChangeText={(text) => setDescricao(text)}
+      />
+  
   <TouchableOpacity style={styles.button} onPress={handleSalvar}>
-    <Text style={styles.buttonText}>Cadastrar</Text>
+    <Text style={styles.buttonText}>Salvar</Text>
   </TouchableOpacity>
 </View>
 );
@@ -92,6 +146,13 @@ buttonText: {
 color: '#434343',
 fontSize: 16,
 fontWeight: 'bold',
+},
+buttonContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  width: '100%',
+  marginBottom: 12,
 },
 });
 
