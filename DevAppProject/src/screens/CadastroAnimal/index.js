@@ -44,9 +44,10 @@ const CadastroPetForm = ({ navigation }) => {
     };
     try {
       const doc = await addDoc(collection(config.db, "animais"), animalData);
-      imageActions.uploadImage(image, "animaisPhoto/"+doc.id);
-      Alert.alert("Animal criado com sucesso!");
-      navigation.navigate("Dashboard");
+      imageActions.uploadImage(image, "animaisPhoto/"+doc.id).then(()=>{
+        Alert.alert("Animal criado com sucesso!");
+        navigation.navigate("Dashboard");
+      });
     } catch (e) {
       console.error("Erro ao cadastrar animal:", error);
       Alert.alert("Falha ao cadastrar o animal!");

@@ -10,6 +10,8 @@ import Container from "../../components/Container";
 import Header from "../../components/Header";
 import config from '../../config/index';
 import styles from './styles.js';
+import ImageButton from "../../components/ImageButton";
+import imageActions from "../../actions/image";
 
 const CadastroPessoal = ({ navigation }) => {
   const [nome_completo, setNomeCompleto] = useState("");
@@ -24,15 +26,9 @@ const CadastroPessoal = ({ navigation }) => {
   const [senha_confirm, setSenhaConfirm] = useState("");
   const [image, setImage] = useState(null);
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-  
-  
+
+  const getImage = async () => {
+    const result = await imageActions.pickImage();
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -59,26 +55,9 @@ const CadastroPessoal = ({ navigation }) => {
           }
         )
         .then(async (docRef) => {
-          fetch(image)
-            .then(async (response) => { response.blob().then(async (blob) => {
-              console.log('imagem:', blob);
-              uploadBytesResumable(ref(getStorage(), `profilePhotos/${email}`), blob)
-              .then((snapshot) => {
-                navigation.navigate('Login');
-              })
-              .catch((error) => {
-                console.log(error);
-                alert("Falha ao persistir a imagem!\n"+error);
-                return;
-              })
-            })
-            .catch((error) => {
-              console.log(error);
-              alert("Falha ao carregar a imagem!\n"+error);
-              return;
-            })
-          });
-        }).catch((error) => {
+          imageActions.uploadImage(image, "profilePhotos/"+email).then(()=> navigation.navigate("Login"))
+        })
+        .catch((error) => {
           console.log(error);
           alert("Falha ao persistir os dados!\n"+error);
           return;
@@ -164,9 +143,9 @@ const CadastroPessoal = ({ navigation }) => {
           onChangeText={(text) => setSenhaConfirm(text)}
         />
         <Text style={styles.sectionText}>FOTO DE PERFIL</Text>
-        <Pressable style={styles.btnImage} onPress={pickImage}>
-          <Text style={styles.btnImageText}>adicionar foto</Text>
-        </Pressable>
+
+        <ImageButton text="adicionar foto" onPress={getImage}/>
+
         <Pressable style={styles.button} onPress={handleCadastro}>
           <Text style={styles.buttonText}>FAZER CADASTRO</Text>
         </Pressable>
