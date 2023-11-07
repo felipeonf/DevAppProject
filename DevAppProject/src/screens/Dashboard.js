@@ -7,6 +7,8 @@ import EditarAnimalForm from "./EditarAnimal";
 import config from "../config/index";
 import { collection, getDoc,doc } from "firebase/firestore";
 
+import animalActions from "../actions/image";
+
 const Dashboard = ({ navigation }) => {
   const navigateToCadastroAnimal = () => {
     navigation.navigate("CadastroAnimal");
@@ -26,10 +28,12 @@ const Dashboard = ({ navigation }) => {
 
   const navigateToEditarAnimal = () => {
     // id do animal constante // TODO: mudar para pegar o id do animal selecionado
-    const animalUID = "FqmCQ5gQeBoq1xTqaxaj";
+    const animalUID = "Z1uUnU4xGbsQsiI64aTd";
     getDoc(doc(collection(config.db, "animais"), animalUID)).then((animalDoc)=>{
       console.log("animal:", animalDoc.data());
-      navigation.navigate("EditarAnimal", { animalDoc: animalDoc });
+      animalActions.getImageURL("animaisPhoto/"+animalUID).then(
+        (url) => navigation.navigate("EditarAnimal", { animalDoc: animalDoc, imageURL: url })
+      )
     });
   };
 

@@ -1,31 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Button, TextInput } from "react-native";
-import { useState } from "react";
-import { addDoc, collection, getDoc,doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { Alert } from "react-native";
 
 import Header from "../../components/Header";
-import ImageButton from "../../components/ImageButton";
 import config from "../../config/index";
-import styles from "../CadastroAnimal/style";
-import imageActions from "../../actions/image";
+import styles from "./style";
+import ImageButton from "../../components/ImageButton";
+import imageActions from "../../actions/image"
 
-const EditarAnimalForm = (props) => {
-  const animalData = props.route.params.animalDoc.data();
-  const animalRef = props.route.params.animalDoc.ref;
-
-  const [nomePet, setNomePet] = useState(animalData.nomePet);
-  const [tipo, setTipo] = useState(animalData.tipo);
-  const [porte, setPorte] = useState(animalData.porte);
-  const [idade, setIdade] = useState(animalData.idade);
-  const [raca, setRaca] = useState(animalData.raca);
-  const [peso, setPeso] = useState(animalData.peso);
-  const [descricao, setDescricao] = useState(animalData.descricao);
-  const [sexo, setSexo] = useState(animalData.sexo);
-  const [adocao, setAdocao] = useState(animalData.adocao);
-  const [vacinado, setVacinado] = useState(animalData.vacinado);
-  const [image, setImage] = useState(props.route.params.imageURL);
-
+const CadastroPetForm = ({ navigation }) => {
+  const [nomePet, setNomePet] = useState("");
+  const [tipo, setTipo] = useState(""); 
+  const [porte, setPorte] = useState("");
+  const [idade, setIdade] = useState("");
+  const [raca, setRaca] = useState("");
+  const [peso, setPeso] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [sexo, setSexo] = useState("");
+  const [adocao, setAdocao] = useState("");
+  const [vacinado, setVacinado] = useState("");
+  const [image, setImage] = useState(null);
 
   const getImage = async () => {
     const result = await imageActions.pickImage();
@@ -34,30 +29,34 @@ const EditarAnimalForm = (props) => {
     }
   };
 
-  const handleEdit = async () => {
-    updateDoc(animalRef, {
+  const handleCadastro = async () => {
+    const animalData = {
       nomePet: nomePet,
       tipo: tipo,
-      porte: porte,
       idade: idade,
       raca: raca,
+      adocao: adocao,
+      vacinado: vacinado,
       peso: peso,
       descricao: descricao,
       sexo: sexo,
-      adocao: adocao,
-      vacinado: vacinado,
-    }).then((doc) => {
+      porte: porte,
+    };
+    try {
+      const doc = await addDoc(collection(config.db, "animais"), animalData);
       imageActions.uploadImage(image, "animaisPhoto/"+doc.id);
-      props.navigation.navigate("Dashboard");
-      console.log("Animal editado com sucesso!");
-    }).catch((error) => {
-      console.log("Erro ao editar animal: ", error);
-    });
+      Alert.alert("Animal criado com sucesso!");
+      navigation.navigate("Dashboard");
+    } catch (e) {
+      console.error("Erro ao cadastrar animal:", error);
+      Alert.alert("Falha ao cadastrar o animal!");
+      navigation.navigate("Dashboard");
+    }
   };
 
   return (
     <>
-      <Header text={"Editar Animal"} backgroundColor={"#fee29b"} topBarColor={"#ffd358"} />
+      <Header text={"Cadastro de Animal"} backgroundColor={"#fee29b"} topBarColor={"#ffd358"} />
       <View style={styles.container}>
         <TextInput
           placeholder="Nome do Pet"
@@ -167,18 +166,17 @@ const EditarAnimalForm = (props) => {
           onChangeText={(text) => setDescricao(text)}
         />
 
-        <ImageButton photoURL={image} onPress={getImage}/>
+        <ImageButton text="adicionar foto" onPress={getImage} />
 
         <TouchableOpacity
           style={[styles.button, { backgroundColor: "#ffd358" }]}
-          onPress={handleEdit}
+          onPress={handleCadastro}
         >
-          <Text style={styles.buttonText}>Editar</Text>
+          <Text style={styles.buttonText}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
     </>
   );
 };
 
-
-export default EditarAnimalForm;
+export default CadastroPetForm;
