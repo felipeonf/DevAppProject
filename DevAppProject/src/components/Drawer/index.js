@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { createDrawerNavigator, DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 import { NavigationContainer } from "@react-navigation/native";
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import config from '../../config';
+
 import 'firebase/auth';
 
-import { signOut } from 'firebase/auth';
+import { useAuth } from '../../config/auth.js'
 
 import VisualizacaoAnimaisUsuario from '../../screens/VisualizacaoAnimaisUsuario';
 import VisualizacaoAnimais from '../../screens/VisualizacaoAnimais';
@@ -32,7 +30,7 @@ const CustomDrawerContentLogout = ({ navigation }) => {
     <DrawerContentScrollView>
       <View style ={styles.drawerHeader}>
         <Image source={require('../../../assets/Meau_Icone.png')} style={styles.drawerImage} />
-        <Text style={styles.text}>Aplicativo</Text>
+        <Text style={styles.text}>Meau</Text>
       </View>
       <DrawerItem 
       label= {() => (<Text style ={styles.customLabel}>Login</Text>)} 
@@ -48,52 +46,46 @@ const CustomDrawerContentLogout = ({ navigation }) => {
   )
 }
 
-const CustomDrawerContentLogin = ({ navigation }) => {
+const CustomDrawerContentLogin = (props) => {
 
   const handleLogout = async () => {
-    const auth = getAuth(config.firebaseApp); 
-  
-    try {
-      await signOut(auth); 
-      console.log('Logout bem-sucedido!');
-    } catch (error) {
-      console.error('Erro ao fazer logout:', error);
-    }
-    navigation.navigate('Login')
+    props.logout();
+    props.navigation.navigate('Login');
   }
+
   return (
     <DrawerContentScrollView>
       <View style ={styles.drawerHeader}>
         <Image source={require('../../../assets/Meau_Icone.png')} style={styles.drawerImage} />
-        <Text style={styles.text}>Seu Nome</Text>
+        <Text style={styles.text}>{ props.user.nome_perfil }</Text>
       </View>
       <DrawerItem 
         label={() => (<Text style ={styles.customLabel}>Visualização do Perfil</Text>)} 
-        onPress={() => navigation.navigate('VisualizacaoPerfil')}
+        onPress={() => props.navigation.navigate('VisualizacaoPerfil')}
         style ={styles.drawerItem} />
       <DrawerItem 
         label= {() => (<Text style ={styles.customLabel}>Cadastro do Animal</Text>)} 
-        onPress={() => navigation.navigate('CadastroAnimal')}
+        onPress={() => props.navigation.navigate('CadastroAnimal')}
         style ={styles.drawerItem} />
       <DrawerItem 
         label={() => (<Text style ={styles.customLabel}>Editar Perfil</Text>)} 
-        onPress={() => navigation.navigate('EditarPerfil')}
+        onPress={() => props.navigation.navigate('EditarPerfil')}
         style ={styles.drawerItem} />
       <DrawerItem 
         label={() => (<Text style ={styles.customLabel}>Meus Animais</Text>)} 
-        onPress={() => navigation.navigate('MeusAnimais')}
+        onPress={() => props.navigation.navigate('MeusAnimais')}
         style ={styles.drawerItem} />
       <DrawerItem 
         label={() => (<Text style ={styles.customLabel}>Ver Animais</Text>)} 
-        onPress={() => navigation.navigate('VisualizacaoAnimais')}
+        onPress={() => props.navigation.navigate('VisualizacaoAnimais')}
         style ={styles.drawerItem} />
       <DrawerItem
         label={() => (<Text style ={styles.customLabel}>Notificações</Text>)}
-        onPress={() => navigation.navigate('Notificações')}
+        onPress={() => props.navigation.navigate('Notificações')}
         style ={styles.drawerItem} />
       <DrawerItem
         label={() => (<Text style ={styles.customLabel}>Chats</Text>)}
-        onPress={() => navigation.navigate('ListChats')}
+        onPress={() => props.navigation.navigate('ListChats')}
         style ={styles.drawerItem} />
       <DrawerItem 
         label={() => (<Text style ={styles.customLabel}>Logout</Text>)} 
@@ -105,22 +97,11 @@ const CustomDrawerContentLogin = ({ navigation }) => {
 }
 
 export default function MyDrawer() {
-  const [user,setUser] = useState(null);
-
-  useEffect(()=>{
-    const unsubscribe = onAuthStateChanged(getAuth(),(authUser) => {
-      if (authUser) {
-        setUser(authUser);
-      } else {
-        setUser(null);
-      }
-    });
-    return () => unsubscribe();
-  },[]);
+  const { user, logout } = useAuth();
 
   return (
     <NavigationContainer independent={true}>
-      <Drawer.Navigator screenOptions={screenOptions} drawerContent={(props) => (user ? <CustomDrawerContentLogin {...props} /> : <CustomDrawerContentLogout{...props} />)}>
+      <Drawer.Navigator screenOptions={screenOptions} drawerContent={(props) => ( user && user.nome_perfil!="" ? <CustomDrawerContentLogin {...props} user={user} logout={logout} /> : <CustomDrawerContentLogout {...props} />)}>
         <Drawer.Screen name="Cadastro" component={Cadastro} />
         <Drawer.Screen name="Login" component={LoginScreen} />
         <Drawer.Screen name="CadastroForm" component={CadastroPessoal} />

@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
                     const user_data = querySnapshot.docs[0].data();
                     user_data['docId'] = querySnapshot.docs[0].ref.id;
                     user_data['userCredential'] = authentication;
-                    console.log('user data:', user_data);
+                    console.log('usuario carregado com sucesso');
                     setUser(user_data);
 
                     // set photo url
@@ -65,7 +65,19 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         // remove user
-        setUser(null);
+        // dados vazios para não quebrar a tela pre carregada ao fazer o logout (essas telas esperam um objeto e não null)
+        setUser({
+            "cidade":"",
+            "email":"",
+            "endereco":"",
+            "estado":"",
+            "idade":"",
+            "nome_completo":"",
+            "nome_perfil":"",
+            "telefone":"",
+            "token":"",
+            "uid":"",
+        });
         // remove notification
         Notifications.setNotificationHandler(null);
         // remove token
