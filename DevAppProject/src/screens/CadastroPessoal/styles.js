@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         padding: 10,
         color: '#bdbdbd',
-        fontSize: 14,
-        borderBlockEndColor: '#e6e7e8',
+        fontSize: 14
     },
     button: {
         width: '100%',

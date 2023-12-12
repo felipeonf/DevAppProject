@@ -49,25 +49,21 @@ const VisualizacaoAnimaisUsuario = ({ navigation }) => {
   };
 
   return (
-    <>
-      <ScrollView>
-        <View>
-          <FlatList
-            data={animais}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("DetalhesAnimal", { animalId: item.id });
-                }}
-              >
-                <AnimalCard animal={item} />
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-      </ScrollView>
-    </>
+    <View>
+      <FlatList
+        data={animais}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("DetalhesAnimal", { animalId: item.id });
+            }}
+          >
+            <AnimalCard animal={item} />
+          </TouchableOpacity>
+        )}
+      />
+    </View>
   );
 };
 
